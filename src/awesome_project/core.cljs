@@ -3,8 +3,8 @@
             ["react-native" :as rn]
             ["react" :as react]
             [reagent.core :as r]
-            [awesome-project.big-map-1]
-            [awesome-project.big-map-2]
+            #_[awesome-project.big-map-1]
+            #_[awesome-project.big-map-2]
             #_[awesome-project.big-map-3]
             #_[awesome-project.big-map-4]))
 
@@ -33,7 +33,3 @@
 
 (defn init []
   (start))
-
-(comment
-  
-  )
