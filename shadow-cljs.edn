@@ -1,0 +1,10 @@
+
+{;:deps true ;{:aliases [:dev]}
+ :source-paths ["src"]
+ :dependencies [[reagent "1.0.0"]]
+ :builds       {:app {:target           :react-native
+                      :init-fn          awesome-project.core/init
+                      :output-dir       "target"
+                      :compiler-options {:infer-externs :auto}
+                      :devtools         {:autoload true
+                                         #_#_:preloads [shadow.expo.keep-awake]}}}}
