@@ -65,3 +65,4 @@ buck-out/
 .nrepl-port
 /.calva/output-window/
 /.lsp/sqlite*.db
+/target/
