@@ -3,10 +3,12 @@
             ["react-native" :as rn]
             ["react" :as react]
             [reagent.core :as r]
-            [awesome-project.big-maps-1]
-            [awesome-project.big-maps-2]
-            [awesome-project.big-maps-3]
-            [awesome-project.big-maps-4]))
+            #_[awesome-project.many-defs-1]
+            #_[awesome-project.many-defs-2]
+            #_[awesome-project.many-defs-3]
+            #_[awesome-project.many-defs-4]
+            #_[awesome-project.many-defs-5]
+            #_[awesome-project.many-defs-6]))
 
 (defonce splash-img (js/require "../assets/shadow-cljs.png"))
 (defonce counter (r/atom 0))
@@ -15,7 +17,7 @@
   [:> rn/View {:style {:flex 1
                        :alignItems "center"
                        :justifyContent "center"}}
-   [:> rn/Text "Hello!!!"]
+   [:> rn/Text "Hello!"]
    [:> rn/Image {:source splash-img :style {:width 200 :height 200}}]
    [:> rn/TouchableOpacity {:fn/on-press #(swap! counter inc)}
     [:> rn/View {:style {:background-color :green

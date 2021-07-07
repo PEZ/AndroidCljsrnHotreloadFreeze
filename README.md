@@ -14,16 +14,17 @@ Then a `shadow-cljs.edn` file and some silly ClojureScript was added.
 
 ## Some big-ish maps
 
-The interesting parts of the project code are the `src/awesome_project/big_map_[1-4].cljs` files. They all contain the exact same map definitions. It's six rather big maps, created with the code in the `lorem.cljs` module. These maps have 100 entries each, where each entry is a map of six random long substrings of this text:
+The interesting parts of the project code are the `many_defs_[1-6].cljs` files. They are created using the code in `lorem.clj`. They contain 1000 definitions each, all of which define a var bound to a map with entries `:a` to `:f`, each referencing a random substring of this text:
 
 > Aenean viverra, ante in mollis cursus, enim ipsum eleifend metus, non ultrices mauris erat eget magna. Mauris molestie elit finibus turpis pharetra dictum. Maecenas eget turpis faucibus, mollis nulla ac, posuere sem. Etiam vitae dictum libero, euismod aliquet tellus. Aliquam ante erat, volutpat vitae bibendum sit amet, fermentum eu diam. Donec finibus lorem luctus pulvinar euismod. Nam nec ante tellus. Aenean interdum velit tincidunt tortor rutrum, ac bibendum urna pharetra. Phasellus vitae dapibus mi. Sed quis felis et odio ultricies commodo eget ut enim.
 
-So, the six maps are unique with unique strings. But they are copy/pasted in to four files. (This is not important for the reproduction, I think, just that I was lazy.)
+So, that is 1000 maps with 7 strings of maximum that ^ length.
 
+**NB:** All files contain the same definitions. Each file is basically a copy of the first one. (As I don't know if ClojureScripts interns strings, I don't know if that is important, it is more a function of me being lazy.)
 
 ## Reproduction
 
-The `big-map-[1-4]` namespaces have ignored (`#_`) requires in `core.cljs`. Start the project with:
+The `many-defs-[1-6]` namespaces have ignored (`#_`) requires in `core.cljs`. Start the project with:
 
 ```
 mpm i
@@ -41,7 +42,7 @@ $ npm run android
 
 Disable Fast Refresh, and start the Debug session. Check that you can hot-reload some small change of the app.
 
-Then unlock the requires of the big maps and hot-reload.
+Then unlock all six requires of the `many-defs-#` namespaces, and hot-reload.
 
 **Expected**: Shadow hot-reloads the change (with no visible change)
 
@@ -49,6 +50,8 @@ Then unlock the requires of the big maps and hot-reload.
 
 ## Discussion
 
-I have tried to reproduce this with Krell as well, but it hasn't happened. I haven't been trying much. I can see that Shadow and Krell choose to reload different sets of files, so maybe it just is less likely to happen in Krell?
+I have tried to reproduce this with Krell as well, but it hasn't happened. I haven't been trying that much, so it is not clear to me that this is an isolated shadow-cljs issue.
 
-When I run this, only three of the `big-maps-#` namespaces need to be required in order for the freeze to happen. The fourth one is included for more freeze guarantee. If it doesn't happen for you with four files required, try with more files.
+When I run this, only two of the `many-defs-#` namespaces need to be required in order for the freeze to happen. The rest are included for better freeze guarantee. If it doesn't happen for you with two requires, try with moar of them.
+
+I've enabled the [Discussions](https://github.com/PEZ/AndroidCljsrnHotreloadFreeze/discussions) tab on this repo. Please engage!
